@@ -1,0 +1,25 @@
+@font-face {
+    font-family: "Merriweather";
+    src: url("Merriweather-Regular.ttf");
+    font-style: normal;
+    font-weight: 400;
+}
+@font-face {
+    font-family: "Merriweather";
+    src: url("Merriweather-Italic.ttf");
+    font-style: italic;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Merriweather";
+    src: url("Merriweather-Bold.ttf");
+    font-style: normal;
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Merriweather";
+    src: url("Merriweather-BoldItalic.ttf");
+    font-style: italic;
+    font-weight: bold;
+}

@@ -1,0 +1,71 @@
+@mixin respond($name)
+{
+  @if map-has-key($grid, $name) {
+    $point: map-get($grid, $name);
+    @if map-has-key($point, from) and map-has-key($point, to) {
+      @media (min-width: #{map-get($point, from)}px) and (max-width: #{map-get($point, to)}px) {
+        @content;
+      }
+    } @else if map-has-key($point, to) {
+      @media (max-width: #{map-get($point, to)}px) {
+        @content;
+      }
+    } @else if map-has-key($point, from) {
+      @media (min-width: #{map-get($point, from)}px) {
+        @content;
+      }
+    }
+  } @else {
+    @warn "Unknown breakpoint '#{$name}'";
+  }
+}
+
+@mixin respond-up($name)
+{
+  @if map-has-key($grid, $name) {
+    $point: map-get($grid, $name);
+    @if map-has-key($point, from) {
+      @media (min-width: #{map-get($point, from)}px) {
+        @content;
+      }
+    }
+  } @else {
+    @warn "Unknown breakpoint '#{$name}'";
+  }
+}
+
+@mixin respond-down($name)
+{
+  @if map-has-key($grid, $name) {
+    $point: map-get($grid, $name);
+    @if map-has-key($point, to) {
+      @media (max-width: #{map-get($point, to)}px) {
+        @content;
+      }
+    }
+  } @else {
+    @warn "Unknown breakpoint '#{$name}'";
+  }
+}
+
+/**
+* From small to large
+* Usage:
+*  @include respond-property(margin-bottom, 15px, 20px, 100px);
+*  @include respond-property(padding, 30px 15px, 40px 30px, 50px 45px);
+*/
+@mixin respond-property($property, $values...) {
+  $grid-counter: 0;
+  @each $name, $data in $grid {
+    $counter: 0;
+    @each $var in $values {
+      @if $counter == $grid-counter {
+        @include respond($name) {
+          #{$property}: #{$var};
+        }
+      }
+      $counter: $counter+1;
+    }
+    $grid-counter: $grid-counter+1;
+  }
+}

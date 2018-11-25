@@ -1,0 +1,16 @@
+/app/runtime/*
+/vendor
+/app/config/local_settings.php
+/node_modules
+/www/static/*
+/www/temp/*
+/www/static_admin/*
+/www/static_modules/*
+/www/media
+
+.idea
+.DS_Store
+yarn.lock
+composer.phar
+composer.lock
+package-lock.json

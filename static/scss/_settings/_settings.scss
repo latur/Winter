@@ -1,0 +1,26 @@
+$max-row-width: 7000;
+$grid-columns: 12;
+$space: 700;
+$offset: 5;
+
+$L: 1440;
+$M: 1024;
+$S: 768;
+$XS: 576;
+
+$grid: (
+  XL: (to: $max-row-width, from: $L, gutter: 12),
+  L:  (to: $L,  from: $M,  gutter: 12),
+  M:  (to: $M,  from: $S,  gutter: 12),
+  S:  (to: $S,  from: $XS, gutter: 12),
+  XS: (to: $XS, from: 0,   gutter: 0)
+);
+
+:export { L: $L; M: $M; S: $S; XS: $XS; space : $space; offset: $offset }
+
+$color_00: #020202;
+$color_10: #202020;
+$color_20: #343434;
+$color_80: #a6a6a6;
+$color_90: #efefef;
+

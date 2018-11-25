@@ -1,0 +1,29 @@
+h1, h2 {
+  font-family: "Rubik", "Lucida Grande", "Lucida Sans", Geneva, Arial, sans-serif;
+  letter-spacing: 0.01em;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 1.25em;
+  color: $color_00;
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 1.3em;
+  color: $color_20;
+}
+
+pre, code {
+  white-space: pre-wrap;
+  font-family: inconsolata, monospace, sans-serif;
+  line-height: 1.3em;
+  font-size: 80%;
+}
+
+strong {
+  font-weight: bold;
+}
