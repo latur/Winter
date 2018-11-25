@@ -1,3 +1,79 @@
+.meta {
+  position: relative;
+
+  .element-meta {
+    opacity: 0;
+    transition: opacity 0.15s linear;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: -130px;
+    width: 120px;
+    border-right: 1px solid rgba(0,0,0,0.1);
+    text-align: right;
+    padding-right: 45px;
+    color: #ddd;
+
+    .remove {
+      position: absolute;
+      right: 10px;
+      top: 3px;
+    }
+  }
+
+  &:hover {
+    .element-meta {
+      opacity: 1;
+    }
+  }
+
+  &:hover {
+    .remove {
+      opacity: 1;
+    }
+  }
+}
+
+.remove {
+  opacity: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 32px;
+  background: rgba(255,255,255,0.9);
+  transition: opacity 0.15s linear, border 0.15s linear;
+  border: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+
+  svg {
+    width: 14px;
+
+    path {
+      fill: #333;
+      transition: fill 0.15s linear;
+    }
+  }
+
+  &:hover {
+    border: 1px solid #a00;
+
+    svg {
+      path {
+        fill: #a00;
+      }
+    }
+  }
+}
+
+.post-title {
+  .remove {
+    display: none;
+  }
+}
+
 [data-editable] {
   hr {
     max-width: $space + px;
@@ -24,76 +100,6 @@
     &:hover {
       &:after {
         background: rgba(50, 28, 255, 0.7);
-      }
-    }
-  }
-
-  .remove {
-    opacity: 0;
-    width: 24px;
-    height: 24px;
-    border-radius: 32px;
-    background: rgba(255,255,255,0.9);
-    transition: opacity 0.15s linear, border 0.15s linear;
-    border: 1px solid #333;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    cursor: pointer;
-
-    svg {
-      width: 14px;
-
-      path {
-        fill: #333;
-        transition: fill 0.15s linear;
-      }
-    }
-
-    &:hover {
-      border: 1px solid #a00;
-
-      svg {
-        path {
-          fill: #a00;
-        }
-      }
-    }
-  }
-
-  .meta {
-    position: relative;
-
-    .element-meta {
-      opacity: 0;
-      transition: opacity 0.15s linear;
-      position: absolute;
-      height: 100%;
-      top: 0;
-      bottom: 0;
-      left: -130px;
-      width: 120px;
-      border-right: 1px solid rgba(0,0,0,0.1);
-      text-align: right;
-      padding-right: 45px;
-      color: #ddd;
-
-      .remove {
-        position: absolute;
-        right: 10px;
-        top: 3px;
-      }
-    }
-
-    &:hover {
-      .element-meta {
-        opacity: 1;
-      }
-    }
-
-    &:hover {
-      .remove {
-        opacity: 1;
       }
     }
   }

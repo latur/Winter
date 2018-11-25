@@ -3,25 +3,16 @@
 {block 'content'}
     <div class="container header-block">
         <a class="logo" href="/">Winter</a>
+        <a data-save class="button">Save</a>
     </div>
 
-    <div class="container">
-        <h1>Ганимед ненаблюдаемо представляет собой непреложный космический мусор. В соответствии с принципом неопределенности</h1>
+    <div class="container meta post-title">
+        <h1 contenteditable="true" data-clean data-name="post-title" data-hepler="Post title">{$post->title}</h1>
+        {include 'parts/element-meta.tpl' name="Title"}
     </div>
 
     <div data-editable>
-        <div class="container">
-            <div class="text">
-                Можно предположить, что двойной интеграл неустойчив относительно
-                гравитационных возмущений. Неоднородность уравновешивает близкий годовой параллакс.
-                Призма, оценивая блеск освещенного металического шарика, концентрирует вращательный
-                график функции многих переменных. Любое возмущение затухает, если полнолуние однородно
-                колеблет лазер, как это случилось в 1994 году с кометой Шумейкеpов-Леви 9. Если для
-                простоты пренебречь потерями на теплопроводность, то видно, что прямое восхождение
-                естественно охватывает коллапсирующий график функции.
-                Теорема Гаусса - Остроградского стабилизирует экситон.
-            </div>
-        </div>
+        {raw $post->getContent()}
     </div>
 
     <div class="container w-control-pane">
@@ -62,50 +53,44 @@
         </div>
     </div>
 
-    {ignore}
     <script type="text/template" id="video">
-        <div data-name="video">
-            <div class="container meta">
-                <div class="text" data-clean contenteditable="true" data-hepler="Paste a Vimeo or YouTube video link here and press Enter"></div>
-                <div class="element-meta">
-                    <span class="name">Text</span>
-                    <a data-action="block-remove" class="remove">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
+        {include 'block/video.tpl'}
     </script>
 
+    {ignore}
+    <script type="text/template" id="video-youtube">
+        <iframe data-name="youtube" src="https://www.youtube-nocookie.com/embed/{:id}"
+                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        <div class="caption" data-clean contenteditable="true" data-name="caption" data-hepler="Video caption (optional)"></div>
+    </script>
+    <script type="text/template" id="video-vimeo">
+        <iframe data-name="vimeo" src="https://player.vimeo.com/video/{:id}"
+                frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <div class="caption" data-clean contenteditable="true" data-name="caption" data-hepler="Video caption (optional)">{:caption}</div>
+    </script>
+    {/ignore}
+
     <script type="text/template" id="text">
-        <div class="container meta">
-            <div class="text" data-hepler="Write post text here"></div>
-            <div class="element-meta">
-                <span class="name">Text</span>
-                <a data-action="block-remove" class="remove">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
+        {include 'block/text.tpl'}
     </script>
 
     <script type="text/template" id="image">
         <input accept="image/*" type="file" name="uploader" multiple />
     </script>
+    {ignore}
     <script type="text/template" id="image-block">
-        <div class="image-block">
-            {:html}
-            <div class="container">
-                <div contenteditable="true" data-hepler="Image caption (optional)" class="caption"></div>
+        <div data-name="image">
+            <div class="image-block">
+                {:html}
+                <div class="container">
+                    <div contenteditable="true" data-clean data-hepler="Image caption (optional)" class="caption"></div>
+                </div>
             </div>
         </div>
     </script>
     <script type="text/template" id="image-line">
-        <div class="image-line">
+        <div data-line class="image-line">
             <div class="line-wrapper">{:html}</div>
         </div>
     </script>
@@ -136,21 +121,10 @@
             </div>
         </div>
     </script>
+    {/ignore}
 
     <script type="text/template" id="points">
-        <div class="container meta">
-            <div class="points-spacer"><i></i><i></i><i></i></div>
-            <div class="element-meta">
-                <span class="name">Spacer</span>
-                <a data-action="block-remove" class="remove">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
+        {include 'block/points.tpl'}
     </script>
-
-    {/ignore}
 
 {/block}

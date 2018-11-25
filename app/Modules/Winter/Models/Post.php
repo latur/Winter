@@ -16,13 +16,13 @@ class Post extends Model
     public static function getFields()
     {
         return [
-            'slug' => [
-                'label' => self::t('Winter', 'Post slug'),
+            'title' => [
+                'label' => self::t('Winter', 'Post title'),
                 'class' => CharField::class,
                 'null' => true,
             ],
-            'title' => [
-                'label' => self::t('Winter', 'Post title'),
+            'slug' => [
+                'label' => self::t('Winter', 'Post slug'),
                 'class' => CharField::class,
                 'null' => true,
             ],
@@ -34,21 +34,20 @@ class Post extends Model
         ];
     }
 
-    public static function saveChanges($object)
+    public function saveContent()
     {
-        $model = Phact::app()->request->post->get('model');
-        if (!$model) return;
-        $object->spec = $model['spec'];
-        $object->save();
+        $this->content = $_POST['content'];
+        $this->title = mb_substr($_POST['title'], 0, 255);
+        $this->save();
     }
 
-    public function getContent($editable = false)
+    public function getContent()
     {
+        if (!is_array($this->content)) return null;
         $html = '';
-        if (!is_array($this->spec)) return $html;
-        foreach ($this->spec as $item) {
-            $html .= self::renderTemplate("parts/_spec.tpl", [
-                'editable' => $editable,
+        foreach ($this->content as $item) {
+            if (!in_array($item['type'], ['audio','video','text','image','points'])) continue ;
+            $html .= self::renderTemplate("block/{$item['type']}.tpl", [
                 'item' => $item
             ]);
         }

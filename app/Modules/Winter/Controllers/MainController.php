@@ -15,7 +15,10 @@ class MainController extends Controller
      */
     public function index()
     {
-        echo $this->render('main/index.tpl');
+        $post = Post::objects()->get();
+        echo $this->render('main/index.tpl', [
+            'post' => $post
+        ]);
     }
 
     public function upload()
@@ -23,6 +26,13 @@ class MainController extends Controller
         $img = new Media();
         echo json_encode($img->decode($_POST['m']));
     }
+
+    public function save()
+    {
+        $post = Post::objects()->get();
+        $post->saveContent();
+    }
+
 
     /**
      * @param null $slug

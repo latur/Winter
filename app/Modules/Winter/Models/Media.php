@@ -10,7 +10,6 @@ use Phact\Translate\Translator;
 class Media extends Model
 {
     use Translator;
-    #protected $ext;
 
     public static function getSizes()
     {
