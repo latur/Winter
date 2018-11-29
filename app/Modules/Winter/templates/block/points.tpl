@@ -1,6 +1,7 @@
-<div data-name="points">
-    <div class="container meta">
+<div data-editor-item data-name="points">
+    {include 'segment/control-pane.tpl'}
+    <div class="container">
         <div class="points-spacer"><i></i><i></i><i></i></div>
-        {include 'segment/element-meta.tpl' name="Spacer"}
+        {include 'segment/block-controls.tpl'}
     </div>
 </div>

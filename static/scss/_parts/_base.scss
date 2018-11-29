@@ -16,6 +16,7 @@ em {
 .container {
   max-width: $space + px;
   margin: auto;
+  position: relative;
 }
 
 .header-block {
@@ -67,7 +68,11 @@ em {
 }
 
 .video-block {
-  padding: 17px 0;
+  padding: 0 0 17px 0;
+
+  iframe {
+    margin: 17px 0;
+  }
 }
 
 .image-block {

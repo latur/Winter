@@ -7,10 +7,20 @@ window.hljs = require('highlight.js');
 window.Quill = require('../components/quill.min.js');
 window.Template = require('../components/Template.js');
 
-let ImageComposer = require('./parts/ImageComposer.js');
+let imageComposer = require('./parts/imageComposer.js');
+let fileComposer = require('./parts/fileComposer.js');
 
 $(function () {
     let after = {};
+
+    after['file'] = function (obj) {
+        obj.click().get(0).onchange = function (e) {
+            let files = [];
+            for (let i = 0; i < e.target.files.length; i++) files.push(e.target.files[i]);
+            $('[data-editable]').append(fileComposer(files));
+            obj.remove();
+        };
+    };
 
     after['text'] = function (obj) {
         new Quill(obj.find('.text').get(0), {
@@ -31,7 +41,7 @@ $(function () {
         obj.click().get(0).onchange = function (e) {
             let files = [];
             for (let i = 0; i < e.target.files.length; i++) files.push(e.target.files[i]);
-            $('[data-editable]').append(ImageComposer(files));
+            $('[data-editable]').append(imageComposer(files));
             obj.remove();
         };
     };
@@ -57,6 +67,8 @@ $(function () {
             });
         });
     };
+
+
 
 
     let parser = {};
@@ -126,7 +138,7 @@ $(function () {
     });
 
     $(document).on('click', '[data-action="block-remove"]', function (e) {
-        $(this).closest('.container').remove();
+        $(this).closest('[data-editor-item]').remove();
     });
 
     $(document).on('click', '[data-w-buttons] a', function (e) {
@@ -136,7 +148,14 @@ $(function () {
         if (tpl.length === 0) return ;
 
         let obj = $(tpl.html());
-        $('[data-editable]').append(obj);
+
+        let before = $(this).closest('[data-editor-item]');
+        if (before.length > 0) {
+            obj.insertBefore(before);
+        } else {
+            $('[data-editable]').append(obj);
+        }
+
         if (after[type]) (after[type])(obj);
     });
 
@@ -151,10 +170,12 @@ $(function () {
  * + Описания под фото
  * + Сохранение фото
  * + Удаление картиник
+ * + Стили - отсупы и ховеры редактора
  * Сохранение страницы
  * Отображение страницы
+ * Мобильная версия редактора
+ * Мобильная версия просмотра поста
  * Парсинг иньекций
- * Стили - отсупы и ховеры
  * Авторизация
  * Статичные страницы и меню (?)
  * Пользовательска страница (?)

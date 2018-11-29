@@ -22,7 +22,7 @@
             <span></span>
             <span></span>
         </a>
-        <a class="btn current" data-type="auto">
+        <a class="btn current" data-type="mini">
             <span style="width: 16px"></span>
             <span style="width: 12px"></span>
             <span style="width: 16px"></span>

@@ -3,8 +3,9 @@
 {add $item.data.vimeo = false}
 {add $item.data.caption = ""}
 
-<div data-name="video">
-    <div class="container meta video-block">
+<div data-editor-item data-name="video">
+    {include 'segment/control-pane.tpl'}
+    <div class="container video-block">
         {if $item.data.youtube}
             {include 'segment/video-youtube.tpl' src=$item.data.youtube caption=$item.data.caption}
         {elseif $item.data.vimeo}
@@ -12,6 +13,6 @@
         {else}
             <div class="text" data-clean contenteditable="true" data-hepler="Paste a Vimeo or YouTube video link here and press Enter"></div>
         {/if}
-        {include 'segment/element-meta.tpl' name="Video"}
+        {include 'segment/block-controls.tpl'}
     </div>
 </div>

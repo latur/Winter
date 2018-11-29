@@ -1,6 +1,7 @@
 {add $item = []}
 {add $item.data = []}
-<div data-name="image">
+<div data-editor-item data-name="image">
+    {include 'segment/control-pane.tpl'}
     <div class="image-block">
         {add $item.data.lines = []}
         {if count($item.data.lines) > 0}

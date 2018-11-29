@@ -15,22 +15,10 @@
     align-items: center;
     display: flex;
     justify-content: flex-end;
-
-    .remove {
-      position: absolute;
-      right: 10px;
-      top: 3px;
-    }
   }
 
   &:hover {
     .element-meta {
-      opacity: 1;
-    }
-  }
-
-  &:hover {
-    .remove {
       opacity: 1;
     }
   }
@@ -69,13 +57,170 @@
   }
 }
 
+.controls {
+  position: absolute;
+  top: 22px;
+  width: 50px;
+  right: -65px;
+}
+
 .post-title {
   .remove {
     display: none;
   }
 }
 
+.w-control-pane {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  transition: opacity 0.25s linear;
+  position: relative;
+  margin: 30px auto 250px auto;
+  z-index: 35;
+
+  &:after {
+    position: absolute;
+    content: '';
+    height: 1px;
+    background: rgba(50, 28, 255, 0.7);
+    left: 0;
+    right: 0;
+    top: 20px;
+    z-index: 10;
+  }
+
+  .uploader {
+    display: none;
+  }
+
+  .w-buttons {
+    position: relative;
+    z-index: 20;
+    background: #FFF;
+    flex: 0 0 42px;
+    display: flex;
+    border: 1px solid rgba(50, 28, 255, 0.7);
+    border-radius: 25px;
+    overflow: hidden;
+    transition: flex 0.15s ease;
+    box-sizing: border-box;
+
+    &:hover {
+      flex: 0 0 216px;
+
+      .w-buttons-wrapper {
+        margin-left: -2px;
+
+        .w-plus {
+          opacity: 0;
+          transform: rotate(180deg);
+        }
+
+        .btn {
+          opacity: 1;
+        }
+      }
+    }
+
+    .w-buttons-wrapper {
+      margin-left: -89px;
+      display: flex;
+      padding: 0 8px;
+      position: relative;
+      transition: margin-left 0.15s ease;
+
+      .w-plus {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        left: 50%;
+        margin-left: -19px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 28px;
+        z-index: 10;
+        transform: rotate(0);
+        transition: opacity 0.15s linear, transform 0.15s linear;
+
+        svg {
+          width: 24px;
+
+          path {
+            fill: rgba(50, 28, 255, 0.9)
+          }
+        }
+      }
+
+      .btn {
+        position: relative;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 20;
+        opacity: 0;
+        transition: opacity 0.15s linear;
+        transition-delay: 0.18s;
+
+        svg {
+          width: 24px;
+
+          path {
+            fill: rgba(50, 28, 255, 0.2);
+            transition: fill 0.15s linear;
+          }
+        }
+
+        &:hover {
+          svg {
+            path {
+              fill: rgba(50, 28, 255, 0.9);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 [data-editable] {
+  & > [data-name] {
+    position: relative;
+
+    &:hover {
+      .remove {
+        opacity: 1;
+      }
+    }
+
+    .container {
+      transition: transform 0.25s ease;
+    }
+
+    .w-control-pane {
+      position: absolute;
+      margin-top: -20px;
+      margin-bottom: -20px;
+      left: 0;
+      right: 0;
+      top: 0;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &:hover + div.container {
+        transform: translateY(20px);
+      }
+    }
+  }
+
   hr {
     max-width: $space + px;
     margin: -25px auto;
@@ -103,6 +248,11 @@
         background: rgba(50, 28, 255, 0.7);
       }
     }
+  }
+
+  [contenteditable=true]:empty:not(:focus)::before {
+    opacity: 0.5;
+    content:attr(data-hepler);
   }
 
   .image-block {
@@ -274,6 +424,31 @@
           }
         }
 
+        &[data-type="mini"]{
+          .line-wrapper {
+            width: 100%;
+
+            .image {
+              width: 100%;
+              padding-left: 0;
+              padding-right: 0;
+
+              & > .remove {
+                right: 5px;
+              }
+
+              &:after {
+                left: 3px;
+                right: 3px;
+              }
+
+              img {
+                width: 100%;
+              }
+            }
+          }
+        }
+
         .image-pane {
           opacity: 0;
           transform: translateY(-10px);
@@ -348,11 +523,6 @@
       }
     }
   }
-
-  [contenteditable=true]:empty:not(:focus)::before {
-    opacity: 0.5;
-    content:attr(data-hepler);
-  }
 }
 
 [name="uploader"] {
@@ -368,119 +538,4 @@ img.image-helper {
   z-index: 60;
   left: -100px;
   top: -100px;
-}
-
-.w-control-pane {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  position: relative;
-  margin-top: 30px;
-  margin-bottom: 30px;
-
-  &:after {
-    position: absolute;
-    content: '';
-    height: 1px;
-    background: $color_80;
-    left: 0;
-    right: 0;
-    top: 20px;
-    z-index: 10;
-  }
-
-  .uploader {
-    display: none;
-  }
-
-  .w-buttons {
-    position: relative;
-    z-index: 20;
-    background: #FFF;
-    flex: 0 0 41px;
-    display: flex;
-    border: 1px solid $color_80;
-    border-radius: 21px;
-    overflow: hidden;
-    transition: flex 0.15s ease;
-
-    .w-buttons-wrapper {
-      margin-left: -89px;
-      display: flex;
-      padding: 0 8px;
-      position: relative;
-      transition: margin-left 0.15s ease;
-
-      .w-plus {
-        position: absolute;
-        width: 40px;
-        height: 39px;
-        left: 50%;
-        margin-left: -20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        font-size: 28px;
-        z-index: 10;
-        transform: rotate(0);
-        transition: opacity 0.15s linear, transform 0.15s linear;
-
-        svg {
-          width: 24px;
-          path {
-            fill: #333
-          }
-        }
-      }
-
-      .btn {
-        position: relative;
-        cursor: pointer;
-        width: 40px;
-        height: 39px;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        z-index: 20;
-        opacity: 0;
-        transition: opacity 0.15s linear;
-        transition-delay: 0.18s;
-
-        svg {
-          width: 24px;
-          path {
-            fill: $color_80;
-            transition: fill 0.15s linear;
-          }
-        }
-
-        &:hover {
-          svg {
-            path {
-              fill: #000;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  &:hover {
-    .w-buttons {
-      flex: 0 0 216px;
-
-      .w-buttons-wrapper {
-        margin-left: -2px;
-
-        .w-plus {
-          opacity: 0;
-          transform: rotate(180deg);
-        }
-
-        .btn {
-          opacity: 1;
-        }
-      }
-    }
-  }
 }
