@@ -143,6 +143,8 @@ module.exports = (function () {
         align();
     });
 
+    align();
+
     return function(fs) {
         return Template('image-block', {html: reader(fs)});
     };

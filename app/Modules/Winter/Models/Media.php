@@ -55,7 +55,7 @@ class Media extends Model
             'error' => self::t('Winter', 'Wrong image type')
         ];
 
-        $name = base_convert(uniqid(), 10, 32) . ".". $exts[$type];
+        $name = base_convert(uniqid() . '' . rand(11111, 99999), 10, 32) . ".". $exts[$type];
         $this->image = new ResourceFile(base64_decode($info[1]), $name);
         $this->code = sha1(random_bytes(100) . uniqid());
         $this->save();

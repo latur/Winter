@@ -1,6 +1,7 @@
 <?php
 namespace Modules\Winter\TemplateLibraries;
 
+use Modules\Winter\Models\Media;
 use Phact\Main\Phact;
 use Phact\Template\TemplateLibrary;
 
@@ -29,6 +30,21 @@ class MainLibrary extends TemplateLibrary
         
         return "<!-- svg not found: [$icon] -->";
 	}
+
+    /**
+     * @name img
+     * @kind function
+     * @return string
+     */
+    public static function img($params)
+    {
+        if (!isset($params[0])) return null;
+        $media = Media::objects()->filter(['code' => $params[0]])->get();
+        if (!$media) return null;
+
+        $size = getimagesize($media->image->getPath());
+        return "<img src='{$media->image->url}' data-w='{$size[0]}' data-h='{$size[1]}' data-code='{$media->code}' />";
+    }
 
 	/**
 	 * @name settings

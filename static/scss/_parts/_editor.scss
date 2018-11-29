@@ -5,15 +5,16 @@
     opacity: 0;
     transition: opacity 0.15s linear;
     position: absolute;
-    height: 100%;
-    top: 0;
-    bottom: 0;
+    top: 8px;
+    bottom: 8px;
     left: -130px;
     width: 120px;
     border-right: 1px solid rgba(0,0,0,0.1);
-    text-align: right;
-    padding-right: 45px;
+    padding-right: 10px;
     color: #ddd;
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
 
     .remove {
       position: absolute;

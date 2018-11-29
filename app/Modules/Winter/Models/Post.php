@@ -1,7 +1,6 @@
 <?php
 namespace Modules\Winter\Models;
 
-use Phact\Main\Phact;
 use Phact\Orm\Fields\CharField;
 use Phact\Orm\Fields\JsonField;
 use Phact\Orm\Model;
@@ -36,7 +35,7 @@ class Post extends Model
 
     public function saveContent()
     {
-        $this->content = $_POST['content'];
+        $this->content = isset($_POST['content']) ? $_POST['content'] : [];
         $this->title = mb_substr($_POST['title'], 0, 255);
         $this->save();
     }

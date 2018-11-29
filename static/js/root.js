@@ -70,7 +70,10 @@ $(function () {
         obj.find('[data-line]').each(function () {
             let images = [];
             $(this).find('img').each(function () {
-                images.push(this.dataset['code']);
+                images.push({
+                    src: this.attributes.src.value,
+                    code: this.dataset['code']
+                });
             });
             lines.push({
                 images: images,
@@ -138,6 +141,10 @@ $(function () {
     });
 
     $(document).on('click', '[data-save]', save);
+
+    $('[data-editable] > [data-name="text"]').each(function () {
+        after['text']($(this));
+    });
 });
 
 /*

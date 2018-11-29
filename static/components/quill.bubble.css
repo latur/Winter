@@ -39,24 +39,16 @@
   word-wrap: break-word;
 }
 .ql-editor p,
-.ql-editor ol,
-.ql-editor ul,
-.ql-editor pre,
-.ql-editor blockquote {
+.ql-editor pre {
   margin: 0;
   padding: 0;
   counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
-}
-.ql-editor ol,
-.ql-editor ul {
-  padding-left: 1.5em;
 }
 .ql-editor ol > li,
 .ql-editor ul > li {
   list-style-type: none;
 }
 .ql-editor ul > li::before {
-  content: '\2022';
 }
 .ql-editor ul[data-checked=true],
 .ql-editor ul[data-checked=false] {
@@ -73,26 +65,8 @@
   pointer-events: all;
 }
 .ql-editor ul[data-checked=true] > li::before {
-  content: '\2611';
 }
 .ql-editor ul[data-checked=false] > li::before {
-  content: '\2610';
-}
-.ql-editor li::before {
-  display: inline-block;
-  white-space: nowrap;
-  width: 1.2em;
-  text-align: right;
-  margin-right: 0.3em;
-  margin-left: -1.5em;
-}
-.ql-editor li.ql-direction-rtl::before {
-  text-align: left;
-  margin-left: 0.3em;
-}
-.ql-editor ol li,
-.ql-editor ul li {
-  padding-left: 1.5em;
 }
 .ql-editor ol li {
   counter-reset: list-1 list-2 list-3 list-4 list-5 list-6 list-7 list-8 list-9;
@@ -586,12 +560,6 @@
 }
 .ql-bubble .ql-editor a {
   text-decoration: underline;
-}
-.ql-bubble .ql-editor blockquote {
-  border-left: 4px solid #ccc;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  padding-left: 16px;
 }
 .ql-bubble .ql-editor code,
 .ql-bubble .ql-editor pre {
