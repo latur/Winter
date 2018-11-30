@@ -43,7 +43,7 @@ module.exports = (function () {
             if ($(this).find('.image').length === 0) $(this).remove();
         });
         $('.image-block').each(function () {
-            if ($(this).find('.image-line').length === 0) $(this).remove();
+            if ($(this).find('.image-line').length === 0) $(this).closest('[data-editor-item]').remove();
         });
 
         // Align images
@@ -52,6 +52,8 @@ module.exports = (function () {
 
             if (imgs.length === 1) {
                 $(this).addClass('solo');
+                $(this).find('[data-image-pane] a').removeClass('current');
+                $(this).find('[data-image-pane] a[data-type="'+$(this).data('type')+'"]').addClass('current');
                 imgs.css({ height: '', width: '' });
                 return ;
             }
