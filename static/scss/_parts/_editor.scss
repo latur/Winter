@@ -421,26 +421,7 @@
 
         &[data-type="mini"]{
           .line-wrapper {
-            width: 100%;
-
-            .image {
-              width: 100%;
-              padding-left: 0;
-              padding-right: 0;
-
-              & > .remove {
-                right: 5px;
-              }
-
-              &:after {
-                left: 3px;
-                right: 3px;
-              }
-
-              img {
-                width: 100%;
-              }
-            }
+            width: 60%;
           }
         }
 
@@ -525,6 +506,7 @@
   opacity: 0.2;
   content:attr(data-hepler);
 }
+
 [contenteditable=true]:empty:not(:focus)::before {
   transition: opacity 0.25s linear;
   opacity: 0.5;

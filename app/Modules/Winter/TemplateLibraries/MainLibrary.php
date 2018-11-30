@@ -1,6 +1,7 @@
 <?php
 namespace Modules\Winter\TemplateLibraries;
 
+use Modules\Winter\Models\Attachment;
 use Modules\Winter\Models\Media;
 use Phact\Main\Phact;
 use Phact\Template\TemplateLibrary;
@@ -46,7 +47,17 @@ class MainLibrary extends TemplateLibrary
         return "<img src='{$media->image->url}' data-w='{$size[0]}' data-h='{$size[1]}' data-code='{$media->code}' />";
     }
 
-	/**
+    /**
+     * @name file
+     * @kind accessorFunction
+     * @return object|boolean
+     */
+    public static function file($code)
+    {
+        return Attachment::objects()->filter(['code' => $code])->get();
+    }
+
+    /**
 	 * @name settings
 	 * @kind function
 	 * @return string

@@ -69,8 +69,6 @@ $(function () {
     };
 
 
-
-
     let parser = {};
 
     parser['text'] = function (obj) {
@@ -98,6 +96,9 @@ $(function () {
         };
     };
 
+    parser['file'] = function (obj) {
+        return obj.find('a[data-code]').attr('data-code');
+    };
 
     function save() {
         let page = [];
@@ -117,6 +118,8 @@ $(function () {
                 'data': item
             });
         });
+
+        console.log(page);
 
         $.post('/save', {
             title: $('[data-name="post-title"]').html(),

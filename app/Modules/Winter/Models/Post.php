@@ -45,7 +45,7 @@ class Post extends Model
         if (!is_array($this->content)) return null;
         $html = '';
         foreach ($this->content as $item) {
-            if (!in_array($item['type'], ['audio','video','text','image','points'])) continue ;
+            if (!in_array($item['type'], ['file','video','text','image','points'])) continue ;
             $html .= self::renderTemplate("block/{$item['type']}.tpl", [
                 'item' => $item
             ]);

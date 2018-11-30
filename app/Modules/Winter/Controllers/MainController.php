@@ -33,14 +33,11 @@ class MainController extends Controller
         echo json_encode($file->loader($_FILES['f']));
     }
 
-
-
     public function save()
     {
         $post = Post::objects()->get();
         $post->saveContent();
     }
-
 
     /**
      * @param null $slug
