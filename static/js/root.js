@@ -17,7 +17,7 @@ $(function () {
         obj.click().get(0).onchange = function (e) {
             let files = [];
             for (let i = 0; i < e.target.files.length; i++) files.push(e.target.files[i]);
-            $('[data-editable]').append(fileComposer(files));
+            $(fileComposer(files)).insertAfter(obj);
             obj.remove();
         };
     };
@@ -41,7 +41,7 @@ $(function () {
         obj.click().get(0).onchange = function (e) {
             let files = [];
             for (let i = 0; i < e.target.files.length; i++) files.push(e.target.files[i]);
-            $('[data-editable]').append(imageComposer(files));
+            $(imageComposer(files)).insertAfter(obj);
             obj.remove();
         };
     };
@@ -65,7 +65,7 @@ $(function () {
                     obj.html(Template('video-vimeo', {id: res.video_id + '', caption: res.title}));
                 }
             });
-        });
+        }).focus();
     };
 
 

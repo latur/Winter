@@ -37,7 +37,7 @@ class Media extends Model
         ];
     }
 
-    public function decode($base64url)
+    public function loader($base64url)
     {
         $exts = [
             'image/jpeg' => 'jpg',

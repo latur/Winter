@@ -12,6 +12,11 @@ return [
         'name' => 'upload'
     ],
     [
+        'route' => '/file',
+        'target' => [\Modules\Winter\Controllers\MainController::class, 'file'],
+        'name' => 'file'
+    ],
+    [
         'route' => '/save',
         'target' => [\Modules\Winter\Controllers\MainController::class, 'save'],
         'name' => 'save'

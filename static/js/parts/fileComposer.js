@@ -2,21 +2,27 @@ module.exports = (function () {
     let index = 1;
 
     function reader(files) {
+        let html = '';
         for (let i in files) {
             let form = new FormData();
-            form.append('media', files[i]);
+            let id = (index++);
+            form.append('f', files[i]);
+            html += Template('file', {
+                id: id,
+                name: files[i].name,
+                size: files[i].size
+            });
             $.ajax({
-                url : '/upload',
-                type: "POST",
-                cache: false,
-                contentType: false,
-                processData: false,
+                url : '/file', type: "POST",
+                cache: false, contentType: false, processData: false,
                 data : form,
-                success: function(response){
+                success: function(res){
+
                 }
             });
-            // Template('file', {name: f.name, size: f.size})
         }
+
+        return html;
     }
 
     return reader;

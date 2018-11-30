@@ -64,19 +64,53 @@ em {
 }
 
 .paragraph {
-  padding: 17px 0;
+  padding: 23px 0;
 }
 
 .video-block {
-  padding: 0 0 17px 0;
+  padding: 23px 0;
 
   iframe {
-    margin: 17px 0;
+    //margin: 17px 0;
   }
 }
 
 .image-block {
   padding: 30px 0;
+}
+
+.files-block {
+  padding: 23px 0;
+}
+
+.file-area {
+  z-index: 20;
+  display: flex;
+  border-radius: 3px;
+  padding: 12px 8px;
+  background: rgba(255, 198, 84, 0.2);
+  align-items: center;
+  font-family: monospace;
+  font-size: 14px;
+
+  .name {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .size {
+  }
+
+  svg {
+    flex: 0 0 34px;
+    width: 34px;
+    margin-right: 4px;
+
+    path {
+      fill: rgba(140, 93, 0, 0.3)
+    }
+  }
 }
 
 .caption {

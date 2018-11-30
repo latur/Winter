@@ -2,10 +2,10 @@
 namespace Modules\Winter\Controllers;
 
 use Modules\Winter\Models\Media;
+use Modules\Winter\Models\Attachment;
 use Modules\Winter\Models\Post;
 use Phact\Controller\Controller;
 use Phact\Main\Phact;
-use Phact\Storage\Files\ResourceFile;
 
 class MainController extends Controller
 {
@@ -24,8 +24,16 @@ class MainController extends Controller
     public function upload()
     {
         $img = new Media();
-        echo json_encode($img->decode($_POST['m']));
+        echo json_encode($img->loader($_POST['m']));
     }
+
+    public function file()
+    {
+        $file = new Attachment();
+        echo json_encode($file->loader($_FILES['f']));
+    }
+
+
 
     public function save()
     {
