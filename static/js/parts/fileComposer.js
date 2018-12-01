@@ -9,19 +9,15 @@ module.exports = (function () {
             let id = 'file-' + (index++);
 
             form.append('f', files[i]);
+
             html += Template('file', {
                 id: id,
                 name: files[i].name,
                 size: files[i].size
             });
 
-            $.ajax({
-                url : '/file', type: "POST",
-                cache: false, contentType: false, processData: false,
-                data: form, dataType: 'json',
-                success: function(res) {
-                    $('#' + id).attr('data-code', res.code);
-                }
+            window.request(window._route.file || '/', form, function(res) {
+                $('#' + id).attr('data-code', res.code);
             });
         }
 

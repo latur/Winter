@@ -5,10 +5,23 @@ use Modules\Winter\Models\Media;
 use Modules\Winter\Models\Attachment;
 use Modules\Winter\Models\Post;
 use Phact\Controller\Controller;
+use Phact\Interfaces\AuthInterface;
 use Phact\Main\Phact;
+use Phact\Request\HttpRequestInterface;
+use Phact\Template\RendererInterface;
 
 class MainController extends Controller
 {
+    /**
+     * @var AuthInterface
+     */
+    protected $_auth;
+
+    public function __construct(HttpRequestInterface $request, AuthInterface $auth, RendererInterface $renderer)
+    {
+        $this->_auth = $auth;
+        parent::__construct($request, $renderer);
+    }
 
     /**
      * @throws \Phact\Exceptions\DependencyException
@@ -19,24 +32,6 @@ class MainController extends Controller
         echo $this->render('main/index.tpl', [
             'post' => $post
         ]);
-    }
-
-    public function upload()
-    {
-        $img = new Media();
-        echo json_encode($img->loader($_POST['m']));
-    }
-
-    public function file()
-    {
-        $file = new Attachment();
-        echo json_encode($file->loader($_FILES['f']));
-    }
-
-    public function save()
-    {
-        $post = Post::objects()->get();
-        $post->saveContent();
     }
 
     /**

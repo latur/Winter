@@ -16,14 +16,15 @@ module.exports = (function () {
                         img.dataset['w'] = img.width;
                         img.dataset['h'] = img.height;
                         $('#image-' + img.dataset['k']).append(img);
-                        $.post('/upload', { m: img.src }, function (res) {
+
+                        window.request(window._route.image || '/', { m: img.src }, function(res) {
                             if (res.error) {
                                 $('#image-' + img.dataset['k']).append('<span>' + res.error + '</span>');
                             } else {
                                 img.src = res.url;
                                 img.dataset['code'] = res.code;
                             }
-                        }, "json");
+                        });
                     }
                     align();
                 };

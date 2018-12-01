@@ -8,9 +8,6 @@
 
     <div class="container meta post-title">
         <h1 contenteditable="true" data-clean data-name="post-title" data-hepler="Post title">{$post->title}</h1>
-        <div class="element-meta">
-            <span class="name">Title</span>
-        </div>
     </div>
 
     <div data-editable>
@@ -61,4 +58,10 @@
         {include 'block/points.tpl'}
     </script>
 
+    <script type="text/javascript">
+        window._route = {ignore}{}{/ignore};
+        window._route.image = '{url 'main:image'}';
+        window._route.file = '{url 'main:file'}';
+        window._route.save = '{url 'main:save'}';
+    </script>
 {/block}

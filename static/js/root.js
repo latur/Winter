@@ -6,6 +6,8 @@ window.sizes = sizes;
 window.hljs = require('highlight.js');
 window.Quill = require('../components/quill.min.js');
 window.Template = require('../components/Template.js');
+window.request = require('../components/request.js');
+
 
 let imageComposer = require('./parts/imageComposer.js');
 let fileComposer = require('./parts/fileComposer.js');
@@ -121,7 +123,7 @@ $(function () {
 
         console.log(page);
 
-        $.post('/save', {
+        window.request(window._route.save || '/', {
             title: $('[data-name="post-title"]').html(),
             content: page
         });
@@ -174,7 +176,8 @@ $(function () {
  * + Сохранение фото
  * + Удаление картиник
  * + Стили - отсупы и ховеры редактора
- * Сохранение страницы
+ * + Сохранение страницы
+ * ! Несохранение до загруузки всех файлов
  * Отображение страницы
  * Мобильная версия редактора
  * Мобильная версия просмотра поста

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="{$.assets_public_path('main.css', 'frontend')}">
     <link rel="stylesheet" href="{$.assets_public_path('root.css', 'frontend')}">
+    <script>window._token = { '{$.request->csrfTokenName}':'{$.request->getCsrfToken()}' };</script>
     {block 'head'}{/block}
 </head>
 <body {if $.is_debug}data-debug="debug"{/if}>
