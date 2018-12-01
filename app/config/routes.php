@@ -9,7 +9,7 @@ return [
     [
         'route' => '',
         'path' => 'Modules.Winter.routes',
-        'namespace' => 'main'
+        'namespace' => 'winter'
     ],
     [
         'route' => '/admin',

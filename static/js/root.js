@@ -123,7 +123,7 @@ $(function () {
 
         console.log(page);
 
-        window.request(window._route.save || '/', {
+        window.request(null, {
             title: $('[data-name="post-title"]').html(),
             content: page
         });
@@ -165,6 +165,12 @@ $(function () {
     });
 
     $(document).on('click', '[data-save]', save);
+
+    $(document).on('click', '[data-create]', function () {
+        window.request(window._route.create, {}, function (res) {
+            location.href = res;
+        });
+    });
 
     $('[data-editable] > [data-name="text"]').each(function () {
         after['text']($(this));

@@ -1,11 +1,6 @@
 {extends '_layouts/base.tpl'}
 
 {block 'content'}
-    <div class="container header-block">
-        <a class="logo" href="/">Winter</a>
-        <a data-save class="button">Save</a>
-    </div>
-
     <div class="container meta post-title">
         <h1 contenteditable="true" data-clean data-name="post-title" data-hepler="Post title">{$post->title}</h1>
     </div>
@@ -19,7 +14,7 @@
     <script type="text/template" id="file">
         <input type="file" name="uploader" multiple />
     </script>
-    <script type="text/template" id="file">
+    <script type="text/template" id="file-block">
         {include 'block/file.tpl'}
     </script>
 
@@ -56,12 +51,5 @@
 
     <script type="text/template" id="points">
         {include 'block/points.tpl'}
-    </script>
-
-    <script type="text/javascript">
-        window._route = {ignore}{}{/ignore};
-        window._route.image = '{url 'main:image'}';
-        window._route.file = '{url 'main:file'}';
-        window._route.save = '{url 'main:save'}';
     </script>
 {/block}

@@ -10,7 +10,7 @@ module.exports = (function () {
 
             form.append('f', files[i]);
 
-            html += Template('file', {
+            html += Template('file-block', {
                 id: id,
                 name: files[i].name,
                 size: files[i].size

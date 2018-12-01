@@ -11,9 +11,24 @@
 </head>
 <body {if $.is_debug}data-debug="debug"{/if}>
 
+<div class="container header-block">
+    <a class="logo" href="/">Winter</a>
+    <div class="buttons-pane">
+        <a data-create class="button">Create story</a>
+        <a data-save class="button">Save</a>
+    </div>
+</div>
+
 {block 'content'}
     content base.tpl
 {/block}
+
+<script type="text/javascript">
+    window._route = {ignore}{}{/ignore};
+    window._route.create = '{url 'winter:create'}';
+    window._route.image = '{url 'winter:image'}';
+    window._route.file = '{url 'winter:file'}';
+</script>
 
 {block 'core_js'}
     <script src="{$.assets_public_path('main.js', 'frontend')}"></script>

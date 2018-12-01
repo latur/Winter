@@ -28,4 +28,14 @@ return [
         'target' => [\Modules\Winter\Controllers\AuthController::class, 'save'],
         'name' => 'save'
     ],
+    [
+        'route' => '/create',
+        'target' => [\Modules\Winter\Controllers\AuthController::class, 'create'],
+        'name' => 'create'
+    ],
+    [
+        'route' => '/editor/{:id}',
+        'target' => [\Modules\Winter\Controllers\AuthController::class, 'editor'],
+        'name' => 'editor'
+    ],
 ];
