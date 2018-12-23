@@ -12,6 +12,8 @@ let imageComposer = require('./parts/imageComposer.js');
 let fileComposer = require('./parts/fileComposer.js');
 
 $(function () {
+    /* --------------------------------------------------------------------- */
+
     let after = {};
 
     after['file'] = function (obj) {
@@ -70,6 +72,8 @@ $(function () {
     };
 
 
+    /* --------------------------------------------------------------------- */
+
     let parser = {};
 
     parser['text'] = function (obj) {
@@ -108,20 +112,6 @@ $(function () {
         });
         return item;
     };
-
-    /* --------------------------------------------------------------------- */
-
-    $(document).on('paste', '[data-clean]', function(e) {
-        e.preventDefault();
-        let pd = e.originalEvent.clipboardData.getData('text');
-        document.execCommand("insertHTML", false, pd);
-    });
-
-    $(document).on('keypress', '[data-clean]', function(e) {
-        if (e.which !== 13) return ;
-        e.preventDefault();
-        return false;
-    });
 
     /* --------------------------------------------------------------------- */
 
@@ -177,24 +167,44 @@ $(function () {
     };
 
     $(document).on('click', '[data-action]', function (e) {
+        if ($(this).hasClass('disabled')) return false;
         let action = $(this).data('action');
         if (actions[action]) actions[action](e, this);
     });
 
+    /* --------------------------------------------------------------------- */
+
+    $(document).on('paste', '[data-clean]', function(e) {
+        e.preventDefault();
+        let data = e.originalEvent.clipboardData.getData('text');
+        document.execCommand("insertHTML", false, data);
+    });
+
+    $(document).on('keypress', '[data-clean]', function(e) {
+        if (e.which !== 13) return ;
+        e.preventDefault();
+        return false;
+    });
+
+    $(window).on('load keyup upload-trigger', function() {
+        let i = parseInt($('body').data('images-loading') || 0);
+        let f = parseInt($('body').data('files-loading') || 0);
+        let t = $('[data-name="post-title"]').text().length == 0;
+
+        console.log('Total uploading items: ' + (i + f));
+
+        if (t || i + f > 0) {
+            $('[data-action="save"]').addClass('disabled');
+        } else {
+            $('[data-action="save"]').removeClass('disabled');
+        }
+    });
+
+    /* --------------------------------------------------------------------- */
 
     $('[data-editable] > [data-name="text"]').each(function () {
         after['text']($(this));
     });
-
-
-    let sync = function () {
-        $('input[data-sync]').each(function () {
-            $(':not(input)[data-sync="'+this.dataset['sync']+'"]').html( this.value );
-        });
-    };
-    $(window).on('load keyup', '[data-sync]', function(e) {});
-
-
 });
 
 /*
@@ -204,7 +214,7 @@ $(function () {
  * + Стили - отсупы и ховеры редактора
  * + Сохранение страницы
  * + Авторизация
- * ! Несохранение страницы до загрузки всех файлов
+ * + Блокировка сохранения поста до загрузки всех файлов
  * Реакция на сохранение
  * Удаление поста
  * Метаданные поста

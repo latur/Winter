@@ -1,5 +1,6 @@
 module.exports = (function () {
-    let index = 1;
+    let index = 0;
+    let loaded = 0;
 
     function reader(files) {
         if (files.length >   4) return reader(files.splice(0, 3)) + reader(files);
@@ -8,18 +9,25 @@ module.exports = (function () {
         let imgs = files.map(function(f) {
             let k = (index++);
             let reader = new FileReader();
+            $(document).trigger('upload-trigger');
+
             reader.onload = function(e) {
                 let img = new Image();
                 img.dataset['k'] = k;
                 img.onload = function () {
                     if (img.src.substr(0, 5) === 'data:') {
+                        let t = $('#image-' + img.dataset['k']);
                         img.dataset['w'] = img.width;
                         img.dataset['h'] = img.height;
-                        $('#image-' + img.dataset['k']).append(img);
+                        t.append(img).append('<span class="processing"></span>');
 
                         window.request(window._route.image || '/', { m: img.src }, function(res) {
+                            loaded += 1;
+                            $('body').data('images-loading', index - loaded);
+                            $(document).trigger('upload-trigger');
+                            t.find('.processing').remove();
                             if (res.error) {
-                                $('#image-' + img.dataset['k']).append('<span>' + res.error + '</span>');
+                                t.append('<span class="error">' + res.error + '</span>');
                             } else {
                                 img.src = res.url;
                                 img.dataset['code'] = res.code;
@@ -84,6 +92,11 @@ module.exports = (function () {
     });
 
     $(document).on('mousedown', function(e) {
+        if (e.button != 0) {
+            e.preventDefault();
+            return ;
+        }
+
         if (!e.target.classList.contains('image-draggable')) return;
 
         drag = $(e.target).find('img').get(0);

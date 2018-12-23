@@ -50,7 +50,7 @@ textarea.form-control {
   letter-spacing: 0.03em;
   color: $action;
   cursor: pointer;
-  transition: color 0.15s linear, background 0.15s linear;
+  transition: color 0.15s linear, background 0.15s linear, filter 0.15s linear, opacity 0.15s linear;
   display: flex;
   align-items: center;
   height: 26px;
@@ -81,10 +81,9 @@ textarea.form-control {
   }
 
   &.disabled {
-    color: #999 !important;
-    border-color: #999;
-    background: #FFF;
-    cursor: default;
+    opacity: 0.3;
+    filter: grayscale(1);
+    cursor: default !important;
   }
   
   &.primary {

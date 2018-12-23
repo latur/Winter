@@ -80,5 +80,5 @@
 {/block}
 
 {block 'controls'}
-    <a data-action="save" class="button">Save & Publish</a>
+    <a data-action="save" class="button primary disabled">Save & Publish</a>
 {/block}

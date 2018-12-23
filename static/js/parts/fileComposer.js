@@ -1,5 +1,6 @@
 module.exports = (function () {
-    let index = 1;
+    let index = 0;
+    let loaded = 0;
 
     function reader(files) {
         let html = '';
@@ -9,15 +10,19 @@ module.exports = (function () {
             let id = 'file-' + (index++);
 
             form.append('f', files[i]);
+            $(document).trigger('upload-trigger');
 
-            html += Template('file-block', {
+            html += template('file-block', {
                 id: id,
                 name: files[i].name,
                 size: files[i].size
             });
 
             window.request(window._route.file || '/', form, function(res) {
+                loaded += 1;
                 $('#' + id).attr('data-code', res.code);
+                $('body').data('files-loading', index - loaded);
+                $(document).trigger('upload-trigger');
             });
         }
 

@@ -20,7 +20,7 @@
                 <div class="buttons-pane">
                     {block 'controls'}
                         {if $admin}
-                            <a data-create class="button">Create story</a>
+                            <a data-action="create" class="button primary">Create story</a>
                         {else}
                         {/if}
                     {/block}
