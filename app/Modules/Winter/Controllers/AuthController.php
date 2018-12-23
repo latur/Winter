@@ -46,6 +46,46 @@ class AuthController extends Controller
     }
 
     /**
+     * @throws \Phact\Exceptions\DependencyException
+     */
+    public function drafts()
+    {
+        echo $this->render('winter/drafts.tpl', [
+            'posts' => Post::objects()->filter([
+                'is_draft' => true
+            ])->all()
+        ]);
+    }
+
+    /**
+     * @throws \Phact\Exceptions\DependencyException
+     */
+    public function stat()
+    {
+        echo $this->render('winter/stat.tpl', []);
+    }
+
+
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Phact\Exceptions\DependencyException
+     * @throws HttpException
+     */
+    public function editor($id)
+    {
+        $post = Post::objects()->filter(['id' => $id])->get();
+        if ($this->request->getIsPost()) {
+            $this->validate();
+            return $post->saveContent();
+        }
+
+        echo $this->render('winter/editor.tpl', [
+            'post' => $post
+        ]);
+    }
+
+    /**
      * @throws HttpException
      */
     private function validate()
@@ -86,22 +126,13 @@ class AuthController extends Controller
     }
 
     /**
-     * @param $id
-     * @return mixed
-     * @throws \Phact\Exceptions\DependencyException
      * @throws HttpException
+     * @throws \Exception
      */
-    public function editor($id)
+    public function logout()
     {
-        $post = Post::objects()->filter(['id' => $id])->get();
-        if ($this->request->getIsPost()) {
-            $this->validate();
-            return $post->saveContent();
-        }
-
-        echo $this->render('winter/editor.tpl', [
-            'post' => $post
-        ]);
+        $this->validate();
+        $this->_auth->logout();
+        echo json_encode($this->_router->url('winter:index'));
     }
-
 }

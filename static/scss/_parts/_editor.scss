@@ -76,7 +76,7 @@
   justify-content: space-around;
   transition: opacity 0.25s linear;
   position: relative;
-  margin: 30px auto 250px auto;
+  margin: 30px auto;
   z-index: 35;
 
   &:after {
@@ -520,10 +520,65 @@
 img.image-helper {
   max-width: 70px;
   max-height: 70px;
-  border: 3px solid rgba(50, 28, 255, 0.7);
+  border: 3px solid $action;
   border-radius: 3px;
   position: absolute;
   z-index: 60;
   left: -100px;
   top: -100px;
+}
+
+
+.modal {
+  position: fixed;
+  background: rgba(255,255,255,0.85);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 450;
+  display: flex;
+  align-items: center;
+  display: none;
+
+  .modal-box {
+    width: 450px;
+
+    .slug-helper {
+      float: right;
+      font-size: 13px;
+    }
+  }
+}
+
+
+
+
+
+
+.context-menu {
+  position: relative;
+
+  .context-block {
+    position: absolute;
+    width: 320px;
+    z-index: 200;
+    right: 5px;
+    top: 40px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+    padding: 10px 14px;
+    transform: scale(0.96);
+    opacity: 0;
+    transform-origin: top center;
+    transition: transform 0.1s linear, opacity 0.1s linear;
+  }
+
+  &.opened {
+    .context-block {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }

@@ -3,17 +3,13 @@
 return [
     'name' => 'Winter | Blog platform',
     'modules' => [
-        'Winter',
         'Assets',
-        'Editor',
-        'Admin',
         'Base',
-        'Files',
-        'Text',
         'Meta',
         'User',
         'Mail',
-        'Sitemap'
+        'Winter',
+        'Sitemap',
     ],
     'components' => [
         'paths' => [
@@ -33,7 +29,7 @@ return [
         'translate' => [
             'class' => \Phact\Translate\Translate::class,
             'calls' => [
-                'setLocale' => ['ru']
+                'setLocale' => ['en']
             ]
         ],
         'db' => [
@@ -60,7 +56,7 @@ return [
                 'debug' => PHACT_DEBUG
             ]
         ],
-        'logger.default' => [
+        'logger' => [
             'class' => \Monolog\Logger::class,
             'arguments' => [
                 'name' => 'default'
@@ -128,7 +124,7 @@ return [
         'settings' => [
             'class' => \Phact\Components\Settings::class
         ],
-        'cache.default' => [
+        'cache' => [
             'class' => \Phact\Cache\Drivers\File::class
         ],
         'mail' => [
@@ -157,11 +153,6 @@ return [
                         'class' => \Modules\Assets\Builds\ManifestBuild::class,
                         'publicPath' => '/static',
                         'manifestFile' => realpath( __DIR__ . '/../../www/static/manifest.json')
-                    ],
-                    'admin' => [
-                        'class' => \Modules\Assets\Builds\ManifestBuild::class,
-                        'publicPath' => '/static_admin',
-                        'manifestFile' => realpath(__DIR__ . '/../../www/static_admin/manifest.json')
                     ],
                     'modules' => [
                         'class' => \Modules\Assets\Builds\SimpleBuild::class,

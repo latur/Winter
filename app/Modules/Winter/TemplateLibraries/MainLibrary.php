@@ -58,6 +58,17 @@ class MainLibrary extends TemplateLibrary
     }
 
     /**
+     * @name date
+     * @kind modifier
+     * @return string
+     */
+    public static function date($str)
+    {
+        return date('M j, Y', strtotime($str));
+    }
+
+
+    /**
 	 * @name settings
 	 * @kind function
 	 * @return string

@@ -1,6 +1,7 @@
 {add $line = []}
 {add $line.images = []}
 {add $line.type = ""}
+
 <div data-line class="image-line{if count($line.images) == 0} solo{/if}" data-type="{$line.type}">
     <div class="line-wrapper">
         {if count($line.images) > 0}
@@ -8,7 +9,9 @@
                 {include 'segment/image-image.tpl' image=$image}
             {/foreach}
         {else}
-            {ignore}{:html}{/ignore}
+            {if $editable}
+                {ignore}{:html}{/ignore}
+            {/if}
         {/if}
     </div>
 </div>

@@ -7,12 +7,33 @@ return [
         'name' => 'index'
     ],
     [
+        'route' => '/login',
+        'target' => [\Modules\Winter\Controllers\MainController::class, 'login'],
+        'name' => 'login'
+    ],
+    [
         'route' => '/post/{s:slug}',
         'target' => [\Modules\Winter\Controllers\MainController::class, 'post'],
         'name' => 'post'
     ],
 
     # AuthController
+    [
+        'route' => '/drafts',
+        'target' => [\Modules\Winter\Controllers\AuthController::class, 'drafts'],
+        'name' => 'drafts'
+    ],
+    [
+        'route' => '/stat',
+        'target' => [\Modules\Winter\Controllers\AuthController::class, 'stat'],
+        'name' => 'stat'
+    ],
+    [
+        'route' => '/editor/{:id}',
+        'target' => [\Modules\Winter\Controllers\AuthController::class, 'editor'],
+        'name' => 'editor'
+    ],
+
     [
         'route' => '/upload/image',
         'target' => [\Modules\Winter\Controllers\AuthController::class, 'image'],
@@ -34,8 +55,8 @@ return [
         'name' => 'create'
     ],
     [
-        'route' => '/editor/{:id}',
-        'target' => [\Modules\Winter\Controllers\AuthController::class, 'editor'],
-        'name' => 'editor'
+        'route' => '/logout',
+        'target' => [\Modules\Winter\Controllers\AuthController::class, 'logout'],
+        'name' => 'logout'
     ],
 ];

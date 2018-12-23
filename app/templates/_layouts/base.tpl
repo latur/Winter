@@ -9,18 +9,46 @@
     <script>window._token = { '{$.request->csrfTokenName}':'{$.request->getCsrfToken()}' };</script>
     {block 'head'}{/block}
 </head>
-<body {if $.is_debug}data-debug="debug"{/if}>
+<body {if $.is_debug}data-debug="debug"{/if} class="{block 'body-class'}{/block}">
+{set $admin = $.user && !$.user->getIsGuest()}
 
-<div class="container header-block">
-    <a class="logo" href="/">Winter</a>
-    <div class="buttons-pane">
-        <a data-create class="button">Create story</a>
-        <a data-save class="button">Save</a>
-    </div>
-</div>
+{block 'body'}
+    {block 'header'}
+        <div class="header-panel">
+            <div class="container header-block">
+                <a class="logo" href="/">Winter</a>
+                <div class="buttons-pane">
+                    {block 'controls'}
+                        {if $admin}
+                            <a data-create class="button">Create story</a>
+                        {else}
+                        {/if}
+                    {/block}
+                </div>
+            </div>
+        </div>
+    {/block}
 
-{block 'content'}
-    content base.tpl
+    {block 'page'}
+        <div class="container page-content">
+            {block 'content'}{/block}
+        </div>
+    {/block}
+
+    {block 'footer'}
+        <div class="footer-panel">
+            <div class="container footer-block">
+                <a href="https://github.com/latur/Winter" target="_blank" class="link">Winter</a>
+                {if $admin}
+                    <a data-action="logout" href="{url 'winter:logout'}" class="link">{t 'Winter' 'Logout'}</a>
+                    <a href="{url 'winter:drafts'}" class="link">{t 'Winter' 'Drafts'}</a>
+                    <a href="{url 'winter:stat'}" class="link">{t 'Winter' 'Statistics'}</a>
+                {else}
+                    <a href="{url 'winter:login'}" class="link">{t 'Winter' 'Login'}</a>
+                {/if}
+            </div>
+        </div>
+    {/block}
 {/block}
 
 <script type="text/javascript">

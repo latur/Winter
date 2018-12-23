@@ -18,9 +18,14 @@ $grid: (
 
 :export { L: $L; M: $M; S: $S; XS: $XS; space : $space; offset: $offset }
 
+$bold: #020202;
+
 $color_00: #020202;
 $color_10: #202020;
 $color_20: #343434;
 $color_80: #a6a6a6;
 $color_90: #efefef;
 
+
+$action: rgba(50, 28, 255, 0.8);
+$action_strong: rgba(50, 28, 255, 1);

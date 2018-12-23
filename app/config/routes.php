@@ -11,19 +11,4 @@ return [
         'path' => 'Modules.Winter.routes',
         'namespace' => 'winter'
     ],
-    [
-        'route' => '/admin',
-        'path' => 'Modules.Admin.routes',
-        'namespace' => 'admin'
-    ],
-    [
-        'route' => '/admin/files',
-        'path' => 'Modules.Files.routes',
-        'namespace' => 'files'
-    ],
-    [
-        'route' => '/admin/editor',
-        'path' => 'Modules.Editor.routes',
-        'namespace' => 'editor'
-    ],
 ];

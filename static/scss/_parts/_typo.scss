@@ -4,6 +4,11 @@ h1, h2 {
   font-weight: bold;
 }
 
+label {
+  font-family: "Rubik", "Lucida Grande", "Lucida Sans", Geneva, Arial, sans-serif;
+  font-weight: 400;
+}
+
 h1 {
   font-size: 32px;
   line-height: 1.25em;
@@ -15,77 +20,4 @@ h2 {
   line-height: 1.3em;
   color: $color_20;
   margin-bottom: 1em;
-}
-
-pre, code {
-  white-space: pre-wrap;
-  font-family: inconsolata, monospace, sans-serif;
-  line-height: 1.3em;
-  background-color: #f0f0f0;
-  border-radius: 3px;
-  padding: 5px 10px;
-  font-size: 85%;
-}
-
-strong {
-  font-weight: bold;
-}
-
-s {
-  text-decoration: line-through;
-}
-
-iframe {
-  width: 100%;
-  height: 394px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.7);
-  background: #000;
-}
-
-blockquote {
-  border-left: 5px solid #ccc;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  padding-left: 17px;
-}
-
-ul, ol {
-  padding-left: 0.8em;
-  padding-top: 0.6em;
-  padding-bottom: 0.6em;
-
-  li {
-    list-style-type: none;
-    padding-left: 1.5em;
-    position: relative;
-  }
-}
-
-ul {
-  li {
-    &:before {
-      content: '';
-      position: absolute;
-      left: 3px;
-      top: 11px;
-      width: 6px;
-      height: 6px;
-      border-radius: 6px;
-      background: #848484;
-    }
-  }
-}
-
-ol {
-  li {
-    &:before {
-      content: counter(list-num, decimal) '.';
-      position: absolute;
-      left: -20px;
-      top: 0px;
-      width: 40px;
-      text-align: right;
-      color: #848484;
-    }
-  }
 }

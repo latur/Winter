@@ -41,7 +41,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack -p --config webpack.static.config.js",
     "watch": "webpack --watch --config webpack.static.config.js",
-    "server": "webpack-dev-server --hot --inline --open --config webpack.static.config.js",
+    "server": "webpack-dev-server --hot --inline --config webpack.static.config.js",
     "build_admin": "NODE_ENV=production webpack -p --config webpack.static_admin.config.js",
     "watch_admin": "webpack --watch --config webpack.static_admin.config.js",
     "php-server": "php -S 127.0.0.1:8000 -t ./www/",

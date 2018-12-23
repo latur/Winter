@@ -1,9 +1,9 @@
 module.exports = function (url, data, after) {
-    if (!after) after = function(){};
+    after = after || function(){};
 
     if (!data.append) {
-        $.post(url, Object.assign(data, window._token), after, 'json');
-        return;
+        data = Object.assign(data, window._token);
+        return $.post(url, data, after, 'json');
     }
 
     let key = Object.keys(window._token)[0];

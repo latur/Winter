@@ -32,10 +32,10 @@ module.exports = (function () {
             };
             reader.readAsDataURL(f);
 
-            return Template('image-image', {id: 'image-' + k, image: ''});
+            return template('image-image', {id: 'image-' + k, image: ''});
         }).join('');
 
-        return Template('image-line', {html: imgs});
+        return template('image-line', {html: imgs});
     }
 
     function align() {
@@ -120,11 +120,11 @@ module.exports = (function () {
     $(document).on('mouseup', function() {
         if (!drag) return ;
         if (over) {
-            let image = Template('image-image', {id: drag.id, image: drag.outerHTML});
+            let image = template('image-image', {id: drag.id, image: drag.outerHTML});
             $(drag).parent().remove();
 
-            if (over.data('tpl') < 3) image = Template('image-line', {html: image});
-            if (over.data('tpl') < 2) image = Template('image-block', {html: image});
+            if (over.data('tpl') < 3) image = template('image-line', {html: image});
+            if (over.data('tpl') < 2) image = template('image-block', {html: image});
             over.before(image);
             align();
         }
@@ -149,6 +149,6 @@ module.exports = (function () {
     align();
 
     return function(fs) {
-        return Template('image-block', {html: reader(fs)});
+        return template('image-block', {html: reader(fs)});
     };
 })();

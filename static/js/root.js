@@ -5,9 +5,8 @@ import sizes from "../scss/_settings/_settings.scss";
 window.sizes = sizes;
 window.hljs = require('highlight.js');
 window.Quill = require('../components/quill.min.js');
-window.Template = require('../components/Template.js');
+window.template = require('../components/template.js');
 window.request = require('../components/request.js');
-
 
 let imageComposer = require('./parts/imageComposer.js');
 let fileComposer = require('./parts/fileComposer.js');
@@ -58,13 +57,13 @@ $(function () {
 
             // Youtube Parser
             let match = url.match(/^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/);
-            if (match && match[1]) return obj.html(Template('video-youtube', {id: match[1]}));
+            if (match && match[1]) return obj.html(template('video-youtube', {id: match[1]}));
 
             // Vimeo Parser
             $.ajax({
                 url: 'https://vimeo.com/api/oembed.json?url=' + url,
                 success: function(res) {
-                    obj.html(Template('video-vimeo', {id: res.video_id + '', caption: res.title}));
+                    obj.html(template('video-vimeo', {id: res.video_id + '', caption: res.title}));
                 }
             });
         }).focus();
@@ -102,33 +101,15 @@ $(function () {
         return obj.find('a[data-code]').attr('data-code');
     };
 
-    function save() {
-        let page = [];
-        $('[data-editable] > *').each(function () {
-            let nm = this.dataset['name'];
-            if (parser[nm]) return page.push({
-                'type': nm,
-                'data': parser[nm]($(this))
-            });
-
-            let item = {};
-            $(this).find('[data-name]').each(function () {
-                item[this.dataset['name']] = $(this).attr('src') || this.innerHTML;
-            });
-            page.push({
-                'type': nm,
-                'data': item
-            });
+    parser['default'] = function (obj) {
+        let item = {};
+        obj.find('[data-name]').each(function () {
+            item[this.dataset['name']] = $(this).attr('src') || this.innerHTML;
         });
+        return item;
+    };
 
-        console.log(page);
-
-        window.request(null, {
-            title: $('[data-name="post-title"]').html(),
-            content: page
-        });
-    }
-
+    /* --------------------------------------------------------------------- */
 
     $(document).on('paste', '[data-clean]', function(e) {
         e.preventDefault();
@@ -142,19 +123,21 @@ $(function () {
         return false;
     });
 
-    $(document).on('click', '[data-action="block-remove"]', function (e) {
-        $(this).closest('[data-editor-item]').remove();
-    });
+    /* --------------------------------------------------------------------- */
 
-    $(document).on('click', '[data-w-buttons] a', function (e) {
+    let actions = {};
+
+    actions['block-remove'] = function (e, h) {
+        $(h).closest('[data-editor-item]').remove();
+    };
+
+    actions['block-add'] = function (e, h) {
         e.preventDefault();
-        let type = $(this).data('type');
-        let tpl = $('#' + type);
-        if (tpl.length === 0) return ;
 
-        let obj = $(tpl.html());
+        let type = $(h).data('type');
+        let obj = $($('#' + type).html());
 
-        let before = $(this).closest('[data-editor-item]');
+        let before = $(h).closest('[data-editor-item]');
         if (before.length > 0) {
             obj.insertBefore(before);
         } else {
@@ -162,19 +145,56 @@ $(function () {
         }
 
         if (after[type]) (after[type])(obj);
-    });
+    };
 
-    $(document).on('click', '[data-save]', save);
+    actions['logout'] = function (e, h) {
+        e.preventDefault();
+        window.request(h.href, {}, function (res) {
+            location.href = res;
+        });
+    };
 
-    $(document).on('click', '[data-create]', function () {
+    actions['create'] = function (e, h) {
         window.request(window._route.create, {}, function (res) {
             location.href = res;
         });
+    };
+
+    actions['save'] = function (e, h) {
+        let content = [];
+        let title = $('[data-name="post-title"]').html();
+
+        $('[data-editable] > *').each(function () {
+            let name = this.dataset['name'];
+            let data = parser[name] ? parser[name]($(this)) : parser['default']($(this));
+            content.push({
+                'type': name,
+                'data': data
+            });
+        });
+
+        window.request(null, {title: title, content: content});
+    };
+
+    $(document).on('click', '[data-action]', function (e) {
+        let action = $(this).data('action');
+        if (actions[action]) actions[action](e, this);
     });
+
 
     $('[data-editable] > [data-name="text"]').each(function () {
         after['text']($(this));
     });
+
+
+    let sync = function () {
+        $('input[data-sync]').each(function () {
+            $(':not(input)[data-sync="'+this.dataset['sync']+'"]').html( this.value );
+        });
+    };
+    $(window).on('load keyup', '[data-sync]', function(e) {});
+
+
 });
 
 /*
@@ -183,16 +203,22 @@ $(function () {
  * + Удаление картиник
  * + Стили - отсупы и ховеры редактора
  * + Сохранение страницы
- * ! Несохранение до загруузки всех файлов
+ * + Авторизация
+ * ! Несохранение страницы до загрузки всех файлов
+ * Реакция на сохранение
+ * Удаление поста
+ * Метаданные поста
+ * Неперетаскивать правой кнопкой
  * Отображение страницы
+ * Пагинация на главной
+ * Темы оформления
+ * Теги и страница поиска по тегу
  * Мобильная версия редактора
  * Мобильная версия просмотра поста
  * Парсинг иньекций
- * Авторизация
  * Статичные страницы и меню (?)
  * Пользовательска страница (?)
  * Выпилить лишние зависимости
  * Инструкция по развертке
- *
  * */
 

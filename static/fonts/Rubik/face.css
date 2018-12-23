@@ -4,3 +4,10 @@
     font-style: normal;
     font-weight: bold;
 }
+
+@font-face {
+    font-family: "Rubik";
+    src: url("Rubik-Medium.ttf");
+    font-style: normal;
+    font-weight: 400;
+}
