@@ -1,5 +1,5 @@
 body {
-  font-family: "Merriweather", Georgia, "Times New Roman", Times, serif;
+  font-family: $serif;
   font-size: 18px;
   line-height: 1.7em;
   color: $color_10;
@@ -35,11 +35,21 @@ em {
 
     h2 {
       margin-bottom: 4px;
+
+      a {
+        color: #23241f;
+      }
     }
 
-    .date {
+    .meta {
       font-size: 80%;
       color: #777;
+
+      .date {
+        &:after {
+          content: ' \00B7';
+        }
+      }
     }
   }
 }

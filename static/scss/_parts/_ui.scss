@@ -23,21 +23,6 @@
   }
 }
 
-label {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.5em;
-
-  .label {
-    font-size: 14px;
-  }
-}
-
-textarea.form-control {
-  resize: vertical;
-  min-height: 66px;
-}
-
 .button {
   user-select: none;
   font-family: sans-serif;
@@ -46,14 +31,14 @@ textarea.form-control {
   border-radius: 5px;
   background: #fff;
   line-height: 20px;
-  padding: 0 8px;
+  padding: 0 14px;
   letter-spacing: 0.03em;
   color: $action;
   cursor: pointer;
   transition: color 0.15s linear, background 0.15s linear, filter 0.15s linear, opacity 0.15s linear;
   display: flex;
   align-items: center;
-  height: 26px;
+  height: 32px;
 
   svg {
     height: 36px;
@@ -75,6 +60,20 @@ textarea.form-control {
     }
   }
 
+  &.round {
+    width: 26px;
+    height: 26px;
+    border-radius: 26px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    svg {
+      width: 16px;
+    }
+  }
+
   &.block {
     width: 100%;
     display: block;
@@ -83,11 +82,10 @@ textarea.form-control {
   &.disabled {
     opacity: 0.3;
     filter: grayscale(1);
-    cursor: default !important;
+    cursor: not-allowed !important;
   }
   
   &.primary {
-    height: 32px;
     border: 1px solid transparent;
     background: $action;
     color: #fff;
@@ -96,4 +94,40 @@ textarea.form-control {
       background: $action_strong;
     }
   }
+
+  &.danger {
+    border: 1px solid #cf0015;
+    color: #cf0015;
+
+    svg {
+      path {
+        fill: #cf0015;
+      }
+    }
+
+    &:hover {
+      background: #cf0015;
+
+      svg {
+        path {
+          fill: #fff
+        }
+      }
+    }
+  }
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5em;
+
+  .label {
+    font-size: 14px;
+  }
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 66px;
 }

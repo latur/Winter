@@ -45,6 +45,31 @@ class AuthController extends Controller
         if (!$user || $user->getIsGuest()) $this->error(405);
     }
 
+
+    /**
+     * @throws HttpException
+     */
+    public function api()
+    {
+        if (!$this->request->getIsPost()) $this->error(405);
+        $this->request->validateCsrfToken();
+        $method = "_" . $this->request->post->get('method');
+        if (method_exists($this, $method)) echo json_encode($this->{$method}());
+    }
+
+
+    /**
+     * @return \Doctrine\DBAL\Driver\Statement|int|string
+     */
+    public function _setActive()
+    {
+        return Post::objects()->filter([
+            'id' => $this->request->post->get('id')
+        ])->update([
+            'active' => $this->request->post->get('to') ? 1 : 0
+        ]);
+    }
+
     /**
      * @throws \Phact\Exceptions\DependencyException
      */
@@ -77,7 +102,8 @@ class AuthController extends Controller
         $post = Post::objects()->filter(['id' => $id])->get();
         if ($this->request->getIsPost()) {
             $this->validate();
-            return $post->saveContent();
+            $post->saveContent();
+            return $this->jsonResponse($post->getUrl());
         }
 
         echo $this->render('winter/editor.tpl', [
@@ -88,7 +114,7 @@ class AuthController extends Controller
     /**
      * @throws HttpException
      */
-    private function validate()
+    protected function validate()
     {
         if ($this->request->getIsPost()) return $this->request->validateCsrfToken();
         throw new HttpException(400, 'POST Method only');

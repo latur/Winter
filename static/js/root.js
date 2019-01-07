@@ -71,7 +71,6 @@ $(function () {
         }).focus();
     };
 
-
     /* --------------------------------------------------------------------- */
 
     let parser = {};
@@ -115,6 +114,8 @@ $(function () {
 
     /* --------------------------------------------------------------------- */
 
+    // let actions = require('./parts/editorActions.js');
+
     let actions = {};
 
     actions['block-remove'] = function (e, h) {
@@ -150,6 +151,32 @@ $(function () {
         });
     };
 
+    actions['post-remove'] = function (e, h) {
+        let id = $(h).data('id');
+        let msg = $(template('alert', { id: id, action: 'post-restore' }));
+        msg.appendTo('body');
+
+        window.request(window.api, { method: 'setActive', id: id, to: 0 }, function (res) {
+            msg.addClass('visible');
+            $('[data-post-id="'+id+'"]').fadeOut(300);
+            setTimeout(function () {
+                msg.removeClass('visible');
+                setTimeout(function () {
+                    msg.remove();
+                }, 200);
+            }, 7000);
+        });
+    };
+
+    actions['post-restore'] = function (e, h) {
+        let id = $(h).data('id');
+        $(h).closest('[data-alert]').removeClass('visible');
+
+        window.request(window.api, { method: 'setActive', id: id, to: 1 }, function (res) {
+            $('[data-post-id="'+id+'"]').fadeIn(300);
+        });
+    };
+
     actions['save'] = function (e, h) {
         let content = [];
         let title = $('[data-name="post-title"]').html();
@@ -163,7 +190,9 @@ $(function () {
             });
         });
 
-        window.request(null, {title: title, content: content});
+        window.request(null, {title: title, content: content}, function (url) {
+            location.href = url;
+        });
     };
 
     $(document).on('click', '[data-action]', function (e) {
@@ -215,16 +244,20 @@ $(function () {
  * + Сохранение страницы
  * + Авторизация
  * + Блокировка сохранения поста до загрузки всех файлов
- * Реакция на сохранение
- * Удаление поста
- * Метаданные поста
- * Неперетаскивать правой кнопкой
- * Отображение страницы
- * Пагинация на главной
- * Темы оформления
- * Теги и страница поиска по тегу
+ * + Неперетаскивать правой кнопкой
+ * + Отображение страницы
+ * + Реакция на сохранение
+ * + Модалька
+ * + Удаление поста
+ * Просмотрщик картинок
  * Мобильная версия редактора
  * Мобильная версия просмотра поста
+ * Метаданные поста
+ * Пагинация на главной
+ * Темы оформления
+ * Настройки
+ * Статистика
+ * Теги и страница поиска по тегу
  * Парсинг иньекций
  * Статичные страницы и меню (?)
  * Пользовательска страница (?)

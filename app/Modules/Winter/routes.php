@@ -35,6 +35,13 @@ return [
     ],
 
     [
+        'route' => '/api',
+        'target' => [\Modules\Winter\Controllers\AuthController::class, 'api'],
+        'name' => 'api'
+    ],
+
+
+    [
         'route' => '/upload/image',
         'target' => [\Modules\Winter\Controllers\AuthController::class, 'image'],
         'name' => 'image'

@@ -1,11 +1,11 @@
 h1, h2 {
-  font-family: "Rubik", "Lucida Grande", "Lucida Sans", Geneva, Arial, sans-serif;
+  font-family: $default;
   letter-spacing: 0.01em;
   font-weight: bold;
 }
 
 label {
-  font-family: "Rubik", "Lucida Grande", "Lucida Sans", Geneva, Arial, sans-serif;
+  font-family: $default;
   font-weight: 400;
 }
 

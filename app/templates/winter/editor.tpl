@@ -13,29 +13,6 @@
 
     {include 'segment/control-pane.tpl'}
 
-    <div data-meta class="modal">
-        <div class="container">
-            <div class="modal-box boxed">
-                <label>
-                    <span class="label">{t 'Winter' 'Title'}</span>
-                    <input type="text" class="form-control" value="" placeholder="" />
-                </label>
-                <label>
-                    <span class="label">{t 'Winter' 'Slug'}
-                        <span class="slug-helper">{$.server.HTTP_HOST}/<span data-sync="slug"></span></span>
-                    </span>
-                    <input type="text" class="form-control" value="" data-sync="slug" placeholder="" />
-                </label>
-                <label>
-                    <span class="label">{t 'Winter' 'Introduction'}</span>
-                    <textarea class="form-control"></textarea>
-                </label>
-                <button class="button primary block">{t 'Winter' 'Save & Publish'}</button>
-            </div>
-        </div>
-    </div>
-
-
     <script type="text/template" id="file">
         <input type="file" name="uploader" multiple />
     </script>

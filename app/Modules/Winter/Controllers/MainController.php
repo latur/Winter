@@ -28,8 +28,10 @@ class MainController extends Controller
     {
         echo $this->render('winter/index.tpl', [
             'posts' => Post::objects()->filter([
-                'is_draft' => false
-            ])->all()
+                'created__lt' => date("Y-m-d H:i:s"),
+                'is_draft' => false,
+                'active' => true,
+            ])->order('-updated')->all()
         ]);
     }
 
@@ -41,8 +43,10 @@ class MainController extends Controller
     public function post($slug)
     {
         $post = Post::objects()->filter([
+            'created__lt' => date("Y-m-d H:i:s"),
+            'is_draft' => false,
+            'active' => true,
             'slug' => $slug,
-            'is_draft' => false
         ])->get();
 
         if (!$post) return false;

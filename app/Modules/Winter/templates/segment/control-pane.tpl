@@ -1,4 +1,4 @@
-<div class="container w-control-pane">
+<div class="container control-pane">
     <div class="w-buttons">
         <div class="w-buttons-wrapper">
             <div class="w-plus">

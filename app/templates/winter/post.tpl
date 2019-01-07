@@ -13,5 +13,6 @@
 {block 'controls'}
     {if $admin}
         <a href="{url 'winter:editor' ['id' => $post->id]}" class="button">{t 'Winter' 'Edit'}</a>
+        <a data-action="create" class="button primary">{t 'Winter' 'Create story'}</a>
     {/if}
 {/block}

@@ -20,7 +20,7 @@
                 <div class="buttons-pane">
                     {block 'controls'}
                         {if $admin}
-                            <a data-action="create" class="button primary">Create story</a>
+                            <a data-action="create" class="button primary">{t 'Winter' 'Create story'}</a>
                         {else}
                         {/if}
                     {/block}
@@ -41,7 +41,12 @@
                 <a href="https://github.com/latur/Winter" target="_blank" class="link">Winter</a>
                 {if $admin}
                     <a data-action="logout" href="{url 'winter:logout'}" class="link">{t 'Winter' 'Logout'}</a>
-                    <a href="{url 'winter:drafts'}" class="link">{t 'Winter' 'Drafts'}</a>
+                    {set $drafts = $.get_drafts_count()}
+                    {if $drafts > 0}
+                        <a href="{url 'winter:drafts'}" class="link">{t 'Winter' 'Drafts'} ({$drafts})</a>
+                    {else}
+                        <span class="link">{t 'Winter' 'Drafts'}</span>
+                    {/if}
                     <a href="{url 'winter:stat'}" class="link">{t 'Winter' 'Statistics'}</a>
                 {else}
                     <a href="{url 'winter:login'}" class="link">{t 'Winter' 'Login'}</a>
@@ -51,7 +56,19 @@
     {/block}
 {/block}
 
+{if $admin}
+<script type="text/template" id="alert">
+    <div data-alert class="alert">
+        <div class="box">
+            <p class="text">{t 'Winter' 'Blog post removed successfully'}</p>
+            <a {ignore} data-action="{:action}" data-id="{:id}" {/ignore} data-button="cancel" class="button">{t 'Winter' 'Restore'}</a>
+        </div>
+    </div>
+</script>
+{/if}
+
 <script type="text/javascript">
+    window.api = '{url 'winter:api'}';
     window._route = {ignore}{}{/ignore};
     window._route.create = '{url 'winter:create'}';
     window._route.image = '{url 'winter:image'}';

@@ -3,6 +3,7 @@ namespace Modules\Winter\TemplateLibraries;
 
 use Modules\Winter\Models\Attachment;
 use Modules\Winter\Models\Media;
+use Modules\Winter\Models\Post;
 use Phact\Main\Phact;
 use Phact\Template\TemplateLibrary;
 
@@ -88,4 +89,17 @@ class MainLibrary extends TemplateLibrary
 	{
 		return self::settings([$name]);
 	}
+
+    /**
+     * @name get_drafts_count
+     * @kind accessorFunction
+     * @return number
+     */
+    public static function getDraftsCount()
+    {
+        return Post::objects()->filter([
+            'is_draft' => true
+        ])->count();
+    }
+
 }
