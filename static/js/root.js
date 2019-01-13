@@ -9,10 +9,10 @@ window.template = require('../components/template.js');
 window.request = require('../components/request.js');
 
 $(function () {
-    /* --------------------------------------------------------------------- */
-
     let after = require('./parts/afterActions.js');
     let data = require('./parts/dataActions.js');
+
+    /* --------------------------------------------------------------------- */
 
     $(document).on('blockAdded', function (e, type, obj) {
         console.log([e, type, obj]);

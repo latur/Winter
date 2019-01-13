@@ -21,7 +21,7 @@ module.exports = (function () {
                         img.dataset['h'] = img.height;
                         t.append(img).append('<span class="processing"></span>');
 
-                        window.request(window._route.image || '/', { m: img.src }, function(res) {
+                        window.request(window.api || '/', { m: img.src, method: 'loadImage' }, function(res) {
                             loaded += 1;
                             $('body').data('images-loading', index - loaded);
                             $(document).trigger('upload-trigger');

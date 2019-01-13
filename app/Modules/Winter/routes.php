@@ -18,58 +18,33 @@ return [
     ],
 
 
-    # AuthController
+    # AdminController
     [
         'route' => '/drafts',
-        'target' => [\Modules\Winter\Controllers\AuthController::class, 'drafts'],
+        'target' => [\Modules\Winter\Controllers\AdminController::class, 'drafts'],
         'name' => 'drafts'
     ],
     [
         'route' => '/stat',
-        'target' => [\Modules\Winter\Controllers\AuthController::class, 'stat'],
+        'target' => [\Modules\Winter\Controllers\AdminController::class, 'stat'],
         'name' => 'stat'
     ],
     [
         'route' => '/settings',
-        'target' => [\Modules\Winter\Controllers\AuthController::class, 'settings'],
+        'target' => [\Modules\Winter\Controllers\AdminController::class, 'settings'],
         'name' => 'settings'
     ],
     [
         'route' => '/editor/{:id}',
-        'target' => [\Modules\Winter\Controllers\AuthController::class, 'editor'],
+        'target' => [\Modules\Winter\Controllers\AdminController::class, 'editor'],
         'name' => 'editor'
     ],
 
+
+    # ApiController
     [
         'route' => '/api',
-        'target' => [\Modules\Winter\Controllers\AuthController::class, 'api'],
+        'target' => [\Modules\Winter\Controllers\ApiController::class, 'api'],
         'name' => 'api'
-    ],
-
-
-    [
-        'route' => '/upload/image',
-        'target' => [\Modules\Winter\Controllers\AuthController::class, 'image'],
-        'name' => 'image'
-    ],
-    [
-        'route' => '/upload/file',
-        'target' => [\Modules\Winter\Controllers\AuthController::class, 'file'],
-        'name' => 'file'
-    ],
-    [
-        'route' => '/save',
-        'target' => [\Modules\Winter\Controllers\AuthController::class, 'save'],
-        'name' => 'save'
-    ],
-    [
-        'route' => '/create',
-        'target' => [\Modules\Winter\Controllers\AuthController::class, 'create'],
-        'name' => 'create'
-    ],
-    [
-        'route' => '/logout',
-        'target' => [\Modules\Winter\Controllers\AuthController::class, 'logout'],
-        'name' => 'logout'
     ],
 ];

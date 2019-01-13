@@ -24,13 +24,13 @@ module.exports.blockAdd = function (e, h) {
 
 module.exports.logout = function (e, h) {
     e.preventDefault();
-    window.request(h.href, {}, function (res) {
+    window.request(window.api, { method: 'logout' }, function (res) {
         location.href = res;
     });
 };
 
 module.exports.create = function (e, h) {
-    window.request(window._route.create, {}, function (res) {
+    window.request(window.api, { method: 'create' }, function (res) {
         location.href = res;
     });
 };

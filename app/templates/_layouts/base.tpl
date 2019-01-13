@@ -49,7 +49,7 @@
 
                     <a href="{url 'winter:settings'}" class="link">{t 'Winter' 'Settings'}</a>
                     <a href="{url 'winter:stat'}" class="link">{t 'Winter' 'Statistics'}</a>
-                    <a data-action="logout" href="{url 'winter:logout'}" class="link">{t 'Winter' 'Logout'}</a>
+                    <a data-action="logout" class="link">{t 'Winter' 'Logout'}</a>
                 {else}
                     <a href="{url 'winter:login'}" class="link">{t 'Winter' 'Login'}</a>
                 {/if}
@@ -71,10 +71,6 @@
 
 <script type="text/javascript">
     window.api = '{url 'winter:api'}';
-    window._route = {ignore}{}{/ignore};
-    window._route.create = '{url 'winter:create'}';
-    window._route.image = '{url 'winter:image'}';
-    window._route.file = '{url 'winter:file'}';
 </script>
 
 {block 'core_js'}

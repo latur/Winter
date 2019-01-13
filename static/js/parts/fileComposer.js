@@ -10,6 +10,7 @@ module.exports = (function () {
             let id = 'file-' + (index++);
 
             form.append('f', files[i]);
+            form.append('method', 'loadFile');
             $(document).trigger('upload-trigger');
 
             html += template('file-block', {
@@ -18,7 +19,7 @@ module.exports = (function () {
                 size: files[i].size
             });
 
-            window.request(window._route.file || '/', form, function(res) {
+            window.request(window.api || '/', form, function(res) {
                 loaded += 1;
                 $('#' + id).attr('data-code', res.code);
                 $('body').data('files-loading', index - loaded);
