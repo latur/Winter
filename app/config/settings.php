@@ -3,12 +3,12 @@
 return [
     'name' => 'Winter | Blog platform',
     'modules' => [
+        'Winter',
         'Assets',
         'Base',
         'Meta',
         'User',
         'Mail',
-        'Winter',
         'Sitemap',
     ],
     'components' => [

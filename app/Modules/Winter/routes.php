@@ -17,6 +17,7 @@ return [
         'name' => 'post'
     ],
 
+
     # AuthController
     [
         'route' => '/drafts',
@@ -27,6 +28,11 @@ return [
         'route' => '/stat',
         'target' => [\Modules\Winter\Controllers\AuthController::class, 'stat'],
         'name' => 'stat'
+    ],
+    [
+        'route' => '/settings',
+        'target' => [\Modules\Winter\Controllers\AuthController::class, 'settings'],
+        'name' => 'settings'
     ],
     [
         'route' => '/editor/{:id}',

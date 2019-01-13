@@ -2,7 +2,7 @@
 
 {block 'page'}
     <div class="container meta post-title">
-        <h1 contenteditable="true" data-clean data-name="post-title" data-hepler="Post title">{$post->title}</h1>
+        <h1 contenteditable="true" data-clean data-name="post-title" data-hepler="{t 'Winter' 'Post title'}">{$post->title}</h1>
     </div>
 
     {set $editable = true}
@@ -57,5 +57,5 @@
 {/block}
 
 {block 'controls'}
-    <a data-action="save" class="button primary disabled">Save & Publish</a>
+    <a data-action="save" class="button primary disabled">{t 'Winter' 'Publish'}</a>
 {/block}

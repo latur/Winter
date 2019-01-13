@@ -1,6 +1,7 @@
 <?php
 namespace Modules\Winter\Controllers;
 
+use Modules\Winter\Forms\SettingsForm;
 use Modules\Winter\Models\Media;
 use Modules\Winter\Models\Attachment;
 use Modules\Winter\Models\Post;
@@ -70,6 +71,7 @@ class AuthController extends Controller
         ]);
     }
 
+
     /**
      * @throws \Phact\Exceptions\DependencyException
      */
@@ -88,6 +90,23 @@ class AuthController extends Controller
     public function stat()
     {
         echo $this->render('winter/stat.tpl', []);
+    }
+
+    /**
+     * @throws \Phact\Exceptions\DependencyException
+     */
+    public function settings()
+    {
+        $form = new SettingsForm();
+        if ($this->request->getIsPost() && $form->fill($_POST)) {
+            $this->request->validateCsrfToken();
+            if ($form->valid) {
+                $form->save();
+            }
+        }
+        echo $this->render('winter/settings.tpl', [
+            'form' => $form
+        ]);
     }
 
 

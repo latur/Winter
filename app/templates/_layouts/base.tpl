@@ -40,14 +40,16 @@
             <div class="container footer-block">
                 <a href="https://github.com/latur/Winter" target="_blank" class="link">Winter</a>
                 {if $admin}
-                    <a data-action="logout" href="{url 'winter:logout'}" class="link">{t 'Winter' 'Logout'}</a>
                     {set $drafts = $.get_drafts_count()}
                     {if $drafts > 0}
                         <a href="{url 'winter:drafts'}" class="link">{t 'Winter' 'Drafts'} ({$drafts})</a>
                     {else}
                         <span class="link">{t 'Winter' 'Drafts'}</span>
                     {/if}
+
+                    <a href="{url 'winter:settings'}" class="link">{t 'Winter' 'Settings'}</a>
                     <a href="{url 'winter:stat'}" class="link">{t 'Winter' 'Statistics'}</a>
+                    <a data-action="logout" href="{url 'winter:logout'}" class="link">{t 'Winter' 'Logout'}</a>
                 {else}
                     <a href="{url 'winter:login'}" class="link">{t 'Winter' 'Login'}</a>
                 {/if}
